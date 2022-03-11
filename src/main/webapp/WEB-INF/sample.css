@@ -2,3 +2,7 @@ body{
     background-color: aquamarine;
     font-family: 'Montserrat', sans-serif;
 }
+
+.error{
+    color:red;
+}

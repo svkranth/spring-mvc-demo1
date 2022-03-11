@@ -2,13 +2,37 @@ package com.mvcdemo;
 
 import java.util.LinkedHashMap;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.mvcdemo.validation.ValidateOS;
+
 public class Student {
 	
+	@NotNull(message="Name is Mandatory")
+	@Size(min=1, max=70, message="Name should be between 1 and 70 characters")
 	private String studentName;
+	@NotNull(message="Gender is mandatory")
 	private char studentGender;
+	@NotNull(message="Country is mandatory")
 	private String studentCountry;
+	@NotNull(message="Choose a Programming language")
 	private String studentFavLanguage;
+	@NotNull(message="Choose at least one OS")
+	@ValidateOS(limit=2, message="Choose atleast 2 OS")
 	private String[] studentKnowsOS;
+	
+	@NotNull(message="GPA can't be empty")
+	@Min(value=1, message="GPA must be between 1 and 5")
+	@Max(value=5, message="GPA must be between 1 and 5")
+	private Integer studentGPA;
+	
+	@NotNull(message="Zip code is required")
+	@Pattern(regexp="[0-9]{5}" , message="Zip code should be numeric and 5 characters")
+	private String studentZip;
 	
 	private LinkedHashMap<String, String> studentCountryList;
 	
@@ -63,6 +87,22 @@ public class Student {
 
 	public void setStudentKnowsOS(String[] studentKnowsOS) {
 		this.studentKnowsOS = studentKnowsOS;
+	}
+
+	public Integer getStudentGPA() {
+		return studentGPA;
+	}
+
+	public void setStudentGPA(Integer studentGPA) {
+		this.studentGPA = studentGPA;
+	}
+
+	public String getStudentZip() {
+		return studentZip;
+	}
+
+	public void setStudentZip(String studentZip) {
+		this.studentZip = studentZip;
 	}
 	
 	

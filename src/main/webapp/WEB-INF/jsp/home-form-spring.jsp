@@ -14,28 +14,43 @@
 <body>
     <h1>Hello there</h1>
     <form:form action="ProcessForm" modelAttribute="student">
-        What is your name? <form:input path="studentName"/>
+        What is your name?(*) <form:input path="studentName"/>
+        <form:errors path="studentName" cssClass="error" />
         <br>
-        Select your Gender:
+        Select your Gender(*):
         <form:select path="studentGender">
             <form:option value="M" label="Male"/>
             <form:option value="F" label="Female"/>
             <form:option value="U" label="Not sprecified"/>
         </form:select>
+        <form:errors path="studentGender" cssClass="error"/>
         <br>
-        Select your Country:
+        Select your Country(*):
         <form:select path="studentCountry">
             <form:options items="${student.studentCountryList}"/>
         </form:select>
+        <form:errors path="studentCountry" cssClass="error"/>
+        <br>
+        Select your Favorite programming Language(*):
         <br>
         Java <form:radiobutton path="studentFavLanguage" value="Java"/>
         COBOL <form:radiobutton path="studentFavLanguage" value="COBOL"/>
         Java script <form:radiobutton path="studentFavLanguage" value="Java script"/>
+        <form:errors path="studentFavLanguage" cssClass="error"/>
+        <br>
+        Select all the Operating systems you know(*):
         <br>
         Linux <form:checkbox path="studentKnowsOS" value="Linux"/>
         Windows <form:checkbox path="studentKnowsOS" value="Windows"/>
         MAC OS <form:checkbox path="studentKnowsOS" value="MAC OS"/>
         Z/os <form:checkbox path="studentKnowsOS" value="Z/os"/>
+        <form:errors path="studentKnowsOS" cssClass="error"/>
+        <br>
+        Enter your GPA(*): <form:input path="studentGPA"/>
+        <form:errors path="studentGPA" cssClass="error"/>
+        <br>
+        Enter your Zip code(*): <form:input path="studentZip"/>
+        <form:errors path="studentZip" cssClass="error"/>
         <br>
         <button type="submit">submit</button>
     </form:form>

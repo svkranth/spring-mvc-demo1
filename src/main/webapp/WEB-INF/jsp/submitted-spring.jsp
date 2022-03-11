@@ -14,7 +14,7 @@
 <body>
     <h1>Your request submitted successfully</h1>
     <h2>${message}</h2>
-    <h3>${student.studentCountry}</h3>
+    <h3>Country: ${student.studentCountry}</h3>
     <h4>Favorite Language: ${student.studentFavLanguage}</h4>
     <h5>Operating systems:</h5>
     <ul>
@@ -22,6 +22,8 @@
             <li>${temp}</li>
         </c:forEach>    
     </ul>
+    <h6>GPA: ${student.studentGPA}</h6>
+    <h6>Zip: ${student.studentZip}</h6>
     <a href="/springform/">SpringHome</a>
 </body>
 </html>

@@ -1,7 +1,13 @@
 package com.mvcdemo;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,23 +30,33 @@ public class AnotherController {
 	}
 	
 	@RequestMapping("/ProcessForm")
-	public String ProcessForm(@ModelAttribute("student") Student theStudent, Model model) {
-		String theName = theStudent.getStudentName();
-		theName = theName.toLowerCase();
-		String salutation;
-		String result;
-		char Gender = theStudent.getStudentGender();
-		if(Gender=='M') {
-			salutation="Mr.";
-			result = "Yo " + salutation+theName + "!";
-		}else if(Gender=='F') {
-			salutation="Miss ";
-			result = "Yo " + salutation+theName + "!";
+	public String ProcessForm(@Valid @ModelAttribute("student") Student theStudent, BindingResult theBindingResult,Model model) {
+		if(theBindingResult.hasErrors()) {
+			return "home-form-spring";
 		}else {
-			result = "Yo " + theName + "!";
+			String theName = theStudent.getStudentName();
+			theName = theName.toLowerCase();
+			String salutation;
+			String result;
+			char Gender = theStudent.getStudentGender();
+			if(Gender=='M') {
+				salutation="Mr.";
+				result = "Yo " + salutation+theName + "!";
+			}else if(Gender=='F') {
+				salutation="Miss ";
+				result = "Yo " + salutation+theName + "!";
+			}else {
+				result = "Yo " + theName + "!";
+			}
+			model.addAttribute("message", result);
+			return "submitted-spring";
 		}
-		model.addAttribute("message", result);
-		return "submitted-spring";
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
 
 }

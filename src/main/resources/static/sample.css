@@ -3,15 +3,6 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
-input{
-    width: 10rem;
-    height: 2rem;
-    border-radius: 25%;
-}
-
-button{
-    width: 10rem;
-    height: 2rem;
-    border-radius: 25%;
-    background-color: blue;
+.error{
+    color:red;
 }
